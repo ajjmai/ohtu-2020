@@ -2,20 +2,10 @@ package ohtu.verkkokauppa;
 
 public class Pankki implements PankkiIO {
 
-    private static Pankki instanssi;
-
-    public static Pankki getInstance() {
-        if (instanssi == null) {
-            instanssi = new Pankki();
-        }
-
-        return instanssi;
-    }
-
     private KirjanpitoIO kirjanpito;
 
-    public Pankki() {
-        kirjanpito = Kirjanpito.getInstance();
+    public Pankki(KirjanpitoIO kirjanpito) {
+        this.kirjanpito = kirjanpito;
     }
 
     @Override
