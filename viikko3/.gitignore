@@ -1,6 +1,5 @@
-/build/
-/*.tmp
-/.gradle
+build/
+.gradle
 .DS_Store
 .classpath
 .project
