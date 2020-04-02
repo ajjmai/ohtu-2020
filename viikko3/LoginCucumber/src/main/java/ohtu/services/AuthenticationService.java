@@ -4,6 +4,7 @@ import ohtu.domain.User;
 import java.util.ArrayList;
 import java.util.List;
 import ohtu.data_access.UserDao;
+import java.util.regex.*;
 
 public class AuthenticationService {
 
@@ -15,8 +16,7 @@ public class AuthenticationService {
 
     public boolean logIn(String username, String password) {
         for (User user : userDao.listAll()) {
-            if (user.getUsername().equals(username)
-                    && user.getPassword().equals(password)) {
+            if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
                 return true;
             }
         }
@@ -39,7 +39,12 @@ public class AuthenticationService {
     }
 
     private boolean invalid(String username, String password) {
-        // validity check of username and password
+        if (username.length() < 3)
+            return true;
+        if (password.length() < 8)
+            return true;
+        if (password.matches("^[a-zA-Z]*$"))
+            return true;
 
         return false;
     }

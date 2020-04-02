@@ -6,10 +6,7 @@ import io.cucumber.junit.CucumberOptions.SnippetType;
 import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
-@CucumberOptions(
-    plugin = "pretty", 
-    features = "src/test/resources/ohtu", 
-    snippets = SnippetType.CAMELCASE 
-)
+@CucumberOptions(plugin = "pretty", features = "src/test/resources/ohtu", snippets = SnippetType.CAMELCASE, tags = {})
 
-public class RunCucumberTest {}
+public class RunCucumberTest {
+}
