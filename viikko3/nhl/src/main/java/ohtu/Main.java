@@ -3,6 +3,7 @@ package ohtu;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.Arrays;
 
 import org.apache.http.client.fluent.Request;
 
@@ -17,6 +18,7 @@ public class Main {
 
         Gson mapper = new Gson();
         Player[] players = mapper.fromJson(bodyText, Player[].class);
+        Arrays.sort(players);
 
         LocalDate now = LocalDate.now();
 
