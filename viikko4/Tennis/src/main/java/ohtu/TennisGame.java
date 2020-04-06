@@ -6,6 +6,7 @@ public class TennisGame {
     private int player2_score = 0;
     private String player1;
     private String player2;
+    private String game_score = "Love-All";
 
     public TennisGame(String player1, String player2) {
         this.player1 = player1;
@@ -18,6 +19,7 @@ public class TennisGame {
         } else {
             player2_score += 1;
         }
+        updateGameScore();
     }
 
     public boolean gameIsEven() {
@@ -39,7 +41,7 @@ public class TennisGame {
         return (player1_score >= 4 || player2_score >= 4) ? true : false;
     }
 
-    public String gameStateToString() {
+    public String gameScoreToString() {
         int scoreDifference = player1_score - player2_score;
 
         if (scoreDifference > 0)
@@ -55,16 +57,20 @@ public class TennisGame {
             return "Win for ";
     }
 
-    public String getScore() {
+    public void updateGameScore() {
         if (gameIsEven()) {
             if (atLeastOnePlayerReachedFourPoints())
-                return "Deuce";
+                game_score = "Deuce";
             else
-                return numberScoreToString(player1_score) + "-All";
+                game_score = numberScoreToString(player1_score) + "-All";
         } else if (atLeastOnePlayerReachedFourPoints()) {
-            return gameStateToString();
+            game_score = gameScoreToString();
         } else {
-            return numberScoreToString(player1_score) + "-" + numberScoreToString(player2_score);
+            game_score = numberScoreToString(player1_score) + "-" + numberScoreToString(player2_score);
         }
+    }
+
+    public String getScore() {
+        return game_score;
     }
 }
