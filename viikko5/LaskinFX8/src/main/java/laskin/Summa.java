@@ -16,6 +16,8 @@ public class Summa extends Komento {
 
     @Override
     public void peru() {
+        sovellus.miinus(edellinenArvo);
+        setLaskunTulos();
     }
 
 }

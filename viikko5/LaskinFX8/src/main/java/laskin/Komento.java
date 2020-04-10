@@ -9,6 +9,7 @@ public abstract class Komento {
     protected Button nollaa;
     protected Button undo;
     protected Sovelluslogiikka sovellus;
+    protected int edellinenArvo = 0;
 
     public Komento(TextField tuloskentta, TextField syotekentta, Button nollaa, Button undo,
             Sovelluslogiikka sovellus) {
@@ -27,6 +28,7 @@ public abstract class Komento {
             arvo = Integer.parseInt(syotekentta.getText());
         } catch (Exception e) {
         }
+        edellinenArvo = arvo;
         return arvo;
     }
 

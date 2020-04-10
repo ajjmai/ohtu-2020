@@ -16,6 +16,8 @@ public class Erotus extends Komento {
 
     @Override
     public void peru() {
+        sovellus.plus(edellinenArvo);
+        setLaskunTulos();
     }
 
 }
