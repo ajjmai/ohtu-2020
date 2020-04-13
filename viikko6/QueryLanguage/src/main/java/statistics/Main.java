@@ -12,61 +12,47 @@ public class Main {
         Statistics stats = new Statistics(new PlayerReaderImpl(url));
 
         QueryBuilder query = new QueryBuilder();
-        Matcher m = query.playsIn("NYR").build();
+
+        System.out.println("\nm1");
+
+        Matcher m1 = query.playsIn("PHI").hasAtLeast(10, "assists").hasFewerThan(8, "goals").build();
+
+        for (Player player : stats.matches(m1)) {
+            System.out.println(player);
+        }
+        System.out.println("\nm2");
+
+        Matcher m2 = query.playsIn("EDM").hasAtLeast(20, "points").build();
+
+        for (Player player : stats.matches(m2)) {
+            System.out.println(player);
+        }
+        System.out.println("\nm");
+
+        Matcher m = query.oneOf(m1, m2).build();
 
         for (Player player : stats.matches(m)) {
             System.out.println(player);
         }
 
-        System.out.println("");
+        System.out.println("\nm3");
 
-        Matcher m2 = query.playsIn("NYR").hasAtLeast(5, "goals").hasFewerThan(10, "goals").build();
+        Matcher m3 = query.oneOf(query.playsIn("PHI").hasAtLeast(10, "assists").hasFewerThan(8, "goals").build(),
 
-        for (Player player : stats.matches(m2)) {
+                query.playsIn("EDM").hasAtLeast(20, "points").build()).build();
+
+        for (Player player : stats.matches(m3)) {
             System.out.println(player);
         }
 
-        // Matcher m = new And(new HasAtLeast(5, "goals"), new HasAtLeast(5, "assists"),
-        // new PlaysIn("PHI"));
+        System.out.println("\nm4");
 
-        // for (Player player : stats.matches(m)) {
-        // System.out.println(player);
-        // }
+        Matcher m4 = new Or(new And(new PlaysIn("PHI"), new HasAtLeast(10, "assists"), new HasFewerThan(8, "goals")),
+                new And(new PlaysIn("EDM"), new HasAtLeast(20, "points")));
 
-        // System.out.println("");
-
-        // Matcher m2 = new And(new HasFewerThan(1, "goals"), new PlaysIn("NYR"));
-
-        // for (Player player : stats.matches(m2)) {
-        // System.out.println(player);
-        // }
-
-        // System.out.println("");
-
-        // Matcher m3 = new And(new Not(new HasAtLeast(1, "goals")), new
-        // PlaysIn("NYR"));
-
-        // for (Player player : stats.matches(m3)) {
-        // System.out.println(player);
-        // }
-
-        // System.out.println("");
-
-        // Matcher m4 = new Or(new HasAtLeast(20, "goals"), new HasAtLeast(20,
-        // "assists"));
-
-        // for (Player player : stats.matches(m4)) {
-        // System.out.println(player);
-        // }
-
-        // System.out.println("");
-
-        // Matcher m5 = new And(new HasAtLeast(20, "points"),
-        // new Or(new PlaysIn("NYR"), new PlaysIn("NYI"), new PlaysIn("NJD")));
-
-        // for (Player player : stats.matches(m5)) {
-        // System.out.println(player);
-        // }
+        for (Player player : stats.matches(m4)) {
+            System.out.println(player);
+        }
 
     }
 }
